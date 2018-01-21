@@ -4,7 +4,6 @@ title: "Image Classification Notes<br>图片分类器笔记"
 date: 2018-01-18
 author: "injuryholmes"
 catalog: false
-use_math: true
 tags:
     - Image Classification
     - Nearest Neighbor Classifier
@@ -107,7 +106,7 @@ cs231N是斯坦福大学的卷积神经网络课程，我通过博客记录自�
 
 接下来，就要引出两个距离方程。
 
-- L1(Manhattan) distance:  $$d_1(I_1, I_2) = \sum_p{|I_1^p - I_2^p|}​$$
+- L1(Manhattan) distance:  $$d_1(I_1, I_2) = \sum_p{|I_1^p - I_2^p|}$$
 - L2(Euclidean) distance: $$d_2(I_1, I_2) = \sqrt{\sum_p{(I_1^p - I_2^p)}^2}$$
 
 
