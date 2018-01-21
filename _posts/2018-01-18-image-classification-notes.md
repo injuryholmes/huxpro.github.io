@@ -38,7 +38,7 @@ cs231N是斯坦福大学的卷积神经网络课程，我通过博客记录自�
 
   ​	假设我们有标签集合 {猫，狗，帽子，马克杯}。下图为待测试图片，计算机能够根据我们写的算法，给该图片贴上“猫”的标签。人能直观的看到一只猫，但是计算机看到的是一个三维的数组，因为一个像素(pixel)是由R(red)、G(green)、B(blue)三个子像素构成。这张猫的图片是248宽 * 400高。所以将这个图片 __*数字化*__ 之后，总共包含248 * 400 * 3 = 297600个数字信息，存储在一个三维数组中。每一个数字都是一个从 0(黑色) 到 255(白色) 之间。
 
-  <img src="../img/in-post/2018-01-18-image-classification-notes/imageClassification_cat.png" alt="mageClassification_cat" width="75%">
+  <img src="/img/in-post/2018-01-18-image-classification-notes/imageClassification_cat.png" alt="mageClassification_cat" width="75%">
 
 
 - 小贴士：
@@ -53,22 +53,22 @@ cs231N是斯坦福大学的卷积神经网络课程，我通过博客记录自�
 
   - 变形（deformation）: 猫咪往往具有一定的延展性。
 
-    <img src="../img/in-post/2018-01-18-image-classification-notes/deformation.png" alt="deformation" width="25%">
+    <img src="/img/in-post/2018-01-18-image-classification-notes/deformation.png" alt="deformation" width="25%">
 
   - 遮挡（occlusion）: 猫咪的一部分被遮挡，只有部分的猫咪能陪看到。
 
-    <img src="../img/in-post/2018-01-18-image-classification-notes/occlusion.png" alt="occlusion" width="25%">
+    <img src="/img/in-post/2018-01-18-image-classification-notes/occlusion.png" alt="occlusion" width="25%">
 
   - 光照条件（illumination conditions）: 因为图片数字化的本质是像素，所以照明条件对图片有很大的影响。
 
-    <img src="../img/in-post/2018-01-18-image-classification-notes/illumination.png" alt="illumination" width="25%">
+    <img src="/img/in-post/2018-01-18-image-classification-notes/illumination.png" alt="illumination" width="25%">
 
   - 混杂的背景（background clutter）: 猫咪和背景融为一体，导致图片区分度下降。
-    <img src="../img/in-post/2018-01-18-image-classification-notes/bgClutter.png" alt="background clutter" width="25%">
+    <img src="/img/in-post/2018-01-18-image-classification-notes/bgClutter.png" alt="background clutter" width="25%">
 
   - 繁多的种类（intra-class variation）: 以下图右下角的椅子为例子，不同的椅子有自己不同的外形。
 
-<img src="../img/in-post/2018-01-18-image-classification-notes/challenges.png" alt="challenges">
+<img src="/img/in-post/2018-01-18-image-classification-notes/challenges.png" alt="challenges">
 
 ​	以上列出了一些常见的问题，一个好的图片分类器模型应当能够不管以上问题以何种组合出现时，都不受到影响。同时能够保持对繁多种类（intra-class variation）的敏感度。
 
@@ -76,7 +76,7 @@ cs231N是斯坦福大学的卷积神经网络课程，我通过博客记录自�
 
 ​	我们通过大量地喂给计算机不同分类的已标记图片，然后构建一个基于这些大数据的算法，来对每个类进行识别。就像我们教一个新生儿认识一棵树一个道理。这种名为大数据驱动法基于大量的已知数据（也叫训练集training set），下面是一个训练集的例子。
 
-<img src="../img/in-post/2018-01-18-image-classification-notes/trainingSet.png" alt="training Set" width="90%">
+<img src="/img/in-post/2018-01-18-image-classification-notes/trainingSet.png" alt="training Set" width="90%">
 
 - 小贴士：
   - 实际情况中，训练数据中每个类都有成千上万的已标记图片。
@@ -98,7 +98,7 @@ cs231N是斯坦福大学的卷积神经网络课程，我通过博客记录自�
 
 ​	CIFAR-10拥有60000张图片，分为10个类别。每张图片的像素是32*32，并且都有自己的标签，这6000张图片被分为两个部分，50000张图片作为训练集（training set），剩下10000张图片作为测试集（test set）。下面的例子，分别从每个类型随机挑选了10张图片。
 
-<img src="../img/in-post/2018-01-18-image-classification-notes/cifar_10.png" alt="cifar_10">
+<img src="/img/in-post/2018-01-18-image-classification-notes/cifar_10.png" alt="cifar_10">
 
 ​	上图中，左边的样本取自CIFAR-10，右边的图片第一列就是我们的待测试图片，然后通过“最近邻居法”，算出在训练集中，离这些测试图片最接近的10张图片。
 
@@ -116,7 +116,7 @@ cs231N是斯坦福大学的卷积神经网络课程，我通过博客记录自�
 
 ​	I是Image的缩写，p上标是对不同像素(pixel)的索引。所以用普通话说，这个L1距离，就是两张图片对应像素点之间的绝对值之和。这个绝对值越小，说明两张图片每个对应像素点越接近，这两张图片属于一个标签的可能性越大；同理，这个绝对值越大，说明两张图片对应像素点差的越远，这两张图片属于一个标签的可能性越小。
 
-<img src="../img/in-post/2018-01-18-image-classification-notes/L1distance.png" alt="L1distance">
+<img src="/img/in-post/2018-01-18-image-classification-notes/L1distance.png" alt="L1distance">
 
 ##### L2(欧几里得距离)
 
@@ -221,9 +221,9 @@ array([[0, 0, 0],
 - 更多详情请点击[Python的numpy的Broadcasting语法糖](http://cs231n.github.io/python-numpy-tutorial/#numpy-broadcasting)
 - 大家对于`sum(X, axis=)` 中参数不了解的，可以点击[这里](https://stackoverflow.com/questions/40857930/how-does-numpy-sum-with-axis-work)。
 
-​	这段代码跑出来的结果是在CIFAR-10上的预测准确率在 __38.6%__ 左右。这么简单的算法已经比随机瞎猜准很多了，瞎猜的概率大概是 __10%__ （因为总共有10类）。不过还是远远不及人类的识别力（__94%__），卷积神经网络目前能达到的准确率是 __95%__，可以在kaggle上[查看](https://www.kaggle.com/c/cifar-10/leaderboard) 。
+  ​这段代码跑出来的结果是在CIFAR-10上的预测准确率在 __38.6%__ 左右。这么简单的算法已经比随机瞎猜准很多了，瞎猜的概率大概是 __10%__ （因为总共有10类）。不过还是远远不及人类的识别力（__94%__），卷积神经网络目前能达到的准确率是 __95%__，可以在kaggle上[查看](https://www.kaggle.com/c/cifar-10/leaderboard) 。
 
-​	如果使用L2距离，只需改一行代码即可。
+  ​如果使用L2距离，只需改一行代码即可。
 
 ```python
 distance = np.sqrt(np.sum(np.square(self.Xtr - X[i, :]), axis = 1))
@@ -245,7 +245,7 @@ distance = np.sqrt(np.sum(np.square(self.Xtr - X[i, :]), axis = 1))
 
 让我们对比K = 5和K = 1两个图片分类器的区别。
 
-<img src="../img/in-post/2018-01-18-image-classification-notes/KNN.png" alt="KNN">
+<img src="/img/in-post/2018-01-18-image-classification-notes/KNN.png" alt="KNN">
 
 
 
@@ -301,7 +301,7 @@ for k in [1, 3, 5, 10, 20, 50, 100]:
 
 ​	如果训练数据比较少，（同时验证集也小），那么我们可以使用更复杂的超参数调整技术，称为交叉验证。承接上面的例子，不是任意选取前1000个数据点作为验证集合和其余的训练集合，而是可以通过多次选择不同的验证集和训练集以平均性能。 例如，在5倍交叉验证（5-fold-cross-validation）中，我们将训练数据分成5个相等的组，使用其中4个组用于训练，1个组用于验证。 然后，我们将迭代验证组的倍数（5次），评估性能，最终得到一个相对平均的超参数值。
 
-<img src="../img/in-post/2018-01-18-image-classification-notes/crossValidation.png" alt="crossValidation">
+<img src="/img/in-post/2018-01-18-image-classification-notes/crossValidation.png" alt="crossValidation">
 
 ​	我们使用5倍交叉验证（5-fold-cross-validation）。不管K值取多少，我们都会进行5次的验证。上表中，y-轴是模型预测的准确率，x轴是K值。我们可以看到，每个x值对应的y值有5个，分别对应选择不同训练集和验证集组合得到的模型准确率。我们取这5个准确率的平均值，构成折线图。折线图表示，当K = 7的时候，模型拥有更好的预测准确度。如果我们使用更高倍的交叉验证法，我们将会得到更加平滑的折线图。
 
@@ -328,7 +328,7 @@ for k in [1, 3, 5, 10, 20, 50, 100]:
 
 - 尽管有这些优化的算法，在实际应用中，最近邻居法仍然很少用于图片识别。因为“图片”是高维物体（图片包含非常多的像素），在高维空间中，距离的概念往往不是那么直观，所以会导致一种情况：一张图片和好多不同的图片距离都相等，但是这些图片本身却不尽相同。
 
-  <img src="../img/in-post/2018-01-18-image-classification-notes/unituitive.png" alt="unituitive">
+  <img src="/img/in-post/2018-01-18-image-classification-notes/unituitive.png" alt="unituitive">
 
   通过距离公式分别计算上述图片original和shifted（移动了一点位置），messed up，还有darkened三者的距离。将三个距离记作$d_1$, $d_2$, $d_3$, 尽管这里$d_1 == d_2 == d_3$ (我们人为构图使得后三张图的像素点满足$d_1 == d_2 == d_3$)，但是这并不代表后面三张图片本身是一样的。
 
