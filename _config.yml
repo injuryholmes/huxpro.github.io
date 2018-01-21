@@ -83,6 +83,10 @@ chrome-tab-theme-color: "#000000"
 service-worker: true
 
 
+# plugins
+plugins:
+  - jekyll-sitemap
+
 
 # Friends
 # friends: [
