@@ -49,4 +49,30 @@
 
     <!-- ga & ba script hoook -->
     <script></script>
+    <!-- MathJax Support -->
+   <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
+   <script type="text/x-mathjax-config">
+     MathJax.Hub.Config({
+       Tex: {
+         equationNumbers: {
+           autoNumber: "AMS"
+         }
+       },
+       tex2jax: {
+         inlineMath: [ ['$','$'], ['\\(','\\)'] ],
+         displayMath: [ ['$$','$$'], ['\[','\]'] ],
+         processEscapes: true,
+       },
+       "HTML-CSS": {
+         preferredFont: "STIX",
+         scale: 100,
+         styles: {
+           ".MathJax_Display": { "text-align": "center", margin: "0em 0em" },
+           ".mi": { "color": "#4d4d4d" },
+           ".mo": { "color": "#4d4d4d" }
+         }
+       }
+     });
+   </script>
+<!-- End MathJax Support -->
 </head>
