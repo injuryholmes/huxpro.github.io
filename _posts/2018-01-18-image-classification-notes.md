@@ -245,9 +245,7 @@ distance = np.sqrt(np.sum(np.square(self.Xtr - X[i, :]), axis = 1))
 
 让我们对比K = 5和K = 1两个图片分类器的区别。
 
-<img src="/img/in-post/2018-01-18-image-classification-notes/KNN.png" alt="KNN">
-
-
+<img src="/img/in-post/2018-01-18-image-classification-notes/knn.png" alt="knn">
 
 ​	我们的图片中包含三种颜色的点（红、绿、蓝），本例中，我们使用L2距离公式。通过颜色区块来表示图片分类器预测的边界（decision boundaries）。白色的区域表示分类器同时给这片区域的点两种颜色以上的标签预测。我们可以注意到，在NN分类器中，离群的点（outlier）（比如，在中间蓝色区域当中的绿色点就是一个离群的点），显然这个绿色的点不应该在蓝色的区域中划分出一块绿色的区域。而用5NN，就提高了一定的容错率，能更好地概括（generalization）所有的测试数据。
 
