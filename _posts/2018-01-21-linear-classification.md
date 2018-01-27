@@ -1,14 +1,14 @@
 ---
 layout: post
 title: "Linear Classification Notes<br>线性分类器笔记"
-date: 2018-01-18
+date: 2018-01-21
 author: "injuryholmes"
 catalog: false
 header-img: "img/post-bg-cs231n.jpg"
 tags:
-	- Linear Classification
-	- Multiclass Support Vector Machine
-	- Softmax
+    - Linear Classification
+    - Multiclass Support Vector Machine
+    - Softmax
 ---
 
 - [线性分类器简介 Intro to Linear classification](#intro)
