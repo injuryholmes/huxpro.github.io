@@ -1,3 +1,16 @@
+---
+layout: post
+title: "Linear Classification Notes<br>线性分类器笔记"
+date: 2018-01-18
+author: "injuryholmes"
+catalog: false
+header-img: "img/post-bg-cs231n.jpg"
+tags:
+	- Linear Classification
+	- Multiclass Support Vector Machine
+	- Softmax
+---
+
 - [线性分类器简介 Intro to Linear classification](#intro)
 - [线性评估函数 Linear score function](#score)
 - [详解线性分类器 Interpreting a linear classifier](#interpret)
