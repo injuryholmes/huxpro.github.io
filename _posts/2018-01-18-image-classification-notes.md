@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Image Classification Notes<br>图片分类器笔记"
+title: "cs231n Lecture 2<br>Image Classification Notes<br>图片分类器笔记"
 date: 2018-01-18
 author: "injuryholmes"
 catalog: false
