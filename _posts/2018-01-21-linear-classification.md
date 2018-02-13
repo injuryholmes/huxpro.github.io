@@ -6,10 +6,18 @@ author: "injuryholmes"
 catalog: false
 header-img: "img/post-bg-cs231n.jpg"
 tags:
-    - Linear Classification
-    - Multiclass Support Vector Machine
-    - Softmax
+    - linear classification
+    - multiclass support vector machine
+    - softmax
 ---
+
+cs231N是斯坦福大学的卷积神经网络课程，我通过博客记录自己的学习心得，对于原文中一些难点做了一下详细的解释。希望能给看文章的你带来帮助。
+
+*为了方便大家对照原文，我尽量在直白翻译和自己的理解之间做权衡，所以文章读起来会有些琐碎。*
+
+*本博客仅做参考，如有措辞不当或理解错误，欢迎大家留言指正。*
+
+更多原文内容请查看[官网](http://cs231n.github.io/linear-classify/)。
 
 - [线性分类器简介 Intro to Linear classification](#intro)
 - [线性评估函数 Linear score function](#score)

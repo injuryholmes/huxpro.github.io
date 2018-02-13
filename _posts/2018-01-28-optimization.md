@@ -6,11 +6,19 @@ author: "injuryholmes"
 catalog: false
 header-img: "img/post-bg-cs231n.jpg"
 tags:
-    - Optimization
+    - optimization
     - gradient descent
     - numerical gradient
     - analytical gradient
 ---
+
+cs231N是斯坦福大学的卷积神经网络课程，我通过博客记录自己的学习心得，对于原文中一些难点做了一下详细的解释。希望能给看文章的你带来帮助。
+
+*为了方便大家对照原文，我尽量在直白翻译和自己的理解之间做权衡，所以文章读起来会有些琐碎。*
+
+*本博客仅做参考，如有措辞不当或理解错误，欢迎大家留言指正。*
+
+更多原文内容请查看[官网](http://cs231n.github.io/optimization-1/)。
 
 - [简介 Introduction](#intro)
 - [损失函数可视化 Visualizing the loss function](#vis)
@@ -349,9 +357,9 @@ while True:
 
 本节的核心内容是计算损失函数的权重的梯度（并对其有一定的直观理解）。之后设计、训练和理解神经网络需要对梯度有感性的认识。在下一节中，我们将分析 `chain rule` （链规则），或称为 `backpropagation` （反向传播）。这将使我们能够更有效地优化各种神经网络的各式各样的损失函数，当然也包括我们的卷积神经网络。
 
+版权声明：
 
-
-
+- 自由转载-非商用-非衍生-保持署名（[创意共享3.0许可证](http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh)）
 
 
 
