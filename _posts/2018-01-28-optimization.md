@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "cs231n Lecture 3<br>Optimization<br>优化"
+title: "cs231n Lecture 3<br>Optimization<br>优化笔记"
 date: 2018-01-28
 author: "injuryholmes"
 catalog: false
