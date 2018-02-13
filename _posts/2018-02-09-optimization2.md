@@ -48,13 +48,19 @@ cs231N是斯坦福大学的卷积神经网络课程，我通过博客记录自�
 ### Simple expressions and interpretation of the gradient
 
 让我们从简单的例子开始。考虑两个数的乘法函数 $f(x,y) = xy$ 。推导任一输入的偏导数是一个简单的微积分问题：
+
+
 $$
 f(x,y) = x y \hspace{0.5in} \rightarrow \hspace{0.5in} \frac{\partial f}{\partial x} = y \hspace{0.5in} \frac{\partial f}{\partial y} = x
 $$
-**Interpretation** 请记住导数定义公式的意义：它们表示函数相对于围绕特定点附近无限小区域的变量的变化率：
+
+
+​	**Interpretation** 请记住导数定义公式的意义：它们表示函数相对于围绕特定点附近无限小区域的变量的变化率：
 $$
 \frac{df(x)}{dx} = \lim_{h\ \to 0} \frac{f(x + h) - f(x)}{h}
 $$
+
+
 ​	注意等式左侧的除法与右侧的除法不同。左边的这个符号表示对函数 $f$ 执行运算符 $\frac{d}{dx}$ ，求得导数，右边就是单纯的除法。当 $h$ 很小时，函数近似一条直线，导数是它每个点的斜率。换句话说，每个变量的导数告诉你整个表达式对其值的敏感度。例如，$x = 4, y = -3$ ，那么 $f(x,y)= - 12$ ，并且 $\frac{\partial f}{\partial x} = -3$ 。这表示如果我们要把这个点的 $x$ 值增加一点，那么对整个表达式的影响就是减少它的三倍。这可以通过重新排列上面的等式 $f(x + h) = f(x) + h \frac{df(x)}{dx}$ 来看出。同理，$\frac{\partial f}{\partial y} = 4$ ，如果将 $y$ 值增加一点 $h$ 也会增加函数的输出，并增加 $4h$ 。
 
 > The derivative on each variable tells you the sensitivity of the whole expression on its value.
@@ -66,13 +72,21 @@ $$
 如前所述，梯度 $\nabla f $ 是所有偏导数组成的向量，所以我们有 $\nabla f = [\frac {\partial f} {\partial x}，\frac {\partial f} {\partial y}] = [y，x]$ 。尽管梯度本质上是一个向量，但为简单起见，我们通常会说 **the gradient on x** 而不是 **the partial derivative on x** 。
 
 我们也可以求`add`的导数：
+
+
 $$
 f(x,y) = x + y \hspace{0.5in} \rightarrow \hspace{0.5in} \frac{\partial f}{\partial x} = 1 \hspace{0.5in} \frac{\partial f}{\partial y} = 1
 $$
+
+
 以及`max`的导数：
+
+
 $$
 f(x,y) = \max(x, y) \hspace{0.5in} \rightarrow \hspace{0.5in} \frac{\partial f}{\partial x} = \mathbb{1}(x >= y) \hspace{0.5in} \frac{\partial f}{\partial y} = \mathbb{1}(y >= x)
 $$
+
+
 由于`max`只对较大的数敏感，所以导数在一个输入上是1，而在另一个输入上是0。举个例子，如果输入是 $x = 4, y = 2$，那么最大值是4，即`max` 对$y$ 的值不敏感，如果我们增加一个微小的 $h$ ，函数会继续输出4，所以 $y$ 的梯度为零：没有效果。当然，如果我们增加 $y$ 大于2，那么 $f$ 的值将会改变，但是导数的定义是 $\lim{h}→0$ 对函数的影响，它们只是对输入信号的极小变化提供了信息。
 
 <a name='backprop'></a>
