@@ -48,15 +48,13 @@ cs231N是斯坦福大学的卷积神经网络课程，我通过博客记录自�
 ### Simple expressions and interpretation of the gradient
 
 让我们从简单的例子开始。考虑两个数的乘法函数 $f(x,y) = xy$ 。推导任一输入的偏导数是一个简单的微积分问题：
-
-
 $$
+\\\\
 f(x,y) = x y \hspace{0.5in} \rightarrow \hspace{0.5in} \frac{\partial f}{\partial x} = y \hspace{0.5in} \frac{\partial f}{\partial y} = x
 $$
-
-
 ​	**Interpretation** 请记住导数定义公式的意义：它们表示函数相对于围绕特定点附近无限小区域的变量的变化率：
 $$
+\\\\
 \frac{df(x)}{dx} = \lim_{h\ \to 0} \frac{f(x + h) - f(x)}{h}
 $$
 
@@ -72,17 +70,13 @@ $$
 如前所述，梯度 $\nabla f $ 是所有偏导数组成的向量，所以我们有 $\nabla f = [\frac {\partial f} {\partial x}，\frac {\partial f} {\partial y}] = [y，x]$ 。尽管梯度本质上是一个向量，但为简单起见，我们通常会说 **the gradient on x** 而不是 **the partial derivative on x** 。
 
 我们也可以求`add`的导数：
-
-
 $$
+\\\\
 f(x,y) = x + y \hspace{0.5in} \rightarrow \hspace{0.5in} \frac{\partial f}{\partial x} = 1 \hspace{0.5in} \frac{\partial f}{\partial y} = 1
 $$
-
-
 以及`max`的导数：
-
-
 $$
+\\\\
 f(x,y) = \max(x, y) \hspace{0.5in} \rightarrow \hspace{0.5in} \frac{\partial f}{\partial x} = \mathbb{1}(x >= y) \hspace{0.5in} \frac{\partial f}{\partial y} = \mathbb{1}(y >= x)
 $$
 
@@ -141,11 +135,13 @@ dfdy = 1.0 * dfdq # dq/dy = 1
 我们上面介绍的门是相对任意的。 任何一种可导函数都可以作为一个门，我们可以把多个门组成一个门，或者为了计算方便，可以把一个函数分解成多个门。 让我们看一个例子：
 
 $$
+\\\\
 f(w,x) = \frac{1}{1+e^{-(w_0x_0 + w_1x_1 + w_2)}}
 $$
 
 这个表达式描述了使用S形激活函数的二维神经元（输入x和权重w）。但是现在让我们把它想象成一个函数，从输入w，x到单个数字。 该函数由多个门组成。 除了上面已经介绍的`add，mul，max`之外，还有四个：
 $$
+\\\\
 f(x) = \frac{1}{x} 
 \hspace{1in} \rightarrow \hspace{1in} 
 \frac{df}{dx} = -1/x^2 
