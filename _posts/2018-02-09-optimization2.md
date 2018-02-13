@@ -102,7 +102,7 @@ dfdy = 1.0 * dfdq # dq/dy = 1
 
 我们可以用电路图表示一下：
 
-<img src="/Users/yingzeliang/injuryholmes.github.io/img/in-post/2018-02-09-optimization2/circuit.png" width="50%">
+<img src="/img/in-post/2018-02-09-optimization2/circuit.png" width="50%">
 
 图中绿色部分是`forward pass`计算出的值。当所有`forword pass`的值计算出来后，我们开始`back prop`。从最后的部分开始反向传播，递归地用`chain rule`来计算，直到计算出最左边的输入的梯度。 
 
@@ -150,7 +150,7 @@ f_a(x) = ax
 $$
 函数 $fc，fa$ 分别是 $x+c$ ，和用 $a$ 进行常数缩放。这些是特殊情况下的加法和乘法，但是我们将它们作为（新）一元门引入，因为我们确实需要常量的梯度 $c, a$ 。 完整的电路如下所示：
 
-<img src="/Users/yingzeliang/injuryholmes.github.io/img/in-post/2018-02-09-optimization2/sigmoidCircuit.png" width="90%">
+<img src="=/img/in-post/2018-02-09-optimization2/sigmoidCircuit.png" width="90%">
 
 二维神经元的示例电路。 输入是$[x0，x1]$ ，神经元的学习权重是 $[w0，w1，w2]$ 。 正如我们后面将会看到的那样，神经元计算输入和权重的点积，然后将该神经元的激活阈值范围通过`sogmoid`函数压缩到0到1之内。
 
@@ -244,11 +244,9 @@ dy += ((1-sigy) * sigy) * dsigy								#(1)
 
 有意思的是，在很多情况下，可以直观的解释`back prop`的梯度。例如，神经网络中最常用的三个门 `add, mul, max`，在反向传播过程中它们的行为方式都有非常简单的解释。 请看以下示例电路：
 
-<img src="/Users/yingzeliang/injuryholmes.github.io/img/in-post/2018-02-09-optimization2/threeBaseCircuit.png" width="60%">
+<img src="/img/in-post/2018-02-09-optimization2/threeBaseCircuit.png" width="60%">
 
 `add`将梯度平均分配给所有输入。`max`将梯度路由到较高的输入。`mul`接受`input activations`（绿色的输入值），交换它们并乘自己的梯度得到`input`的梯度。
-
-
 
 `add`门总是将其输出上的梯度平均分配给所有输入，而不管它们在`forward pass`期间的值如何。这是因为`add`操作的`local gradient`为+1.0，所以所有输入的梯度等于输出的梯度。比如图中`add` 门将 2.00 的梯度路由到其两个输入。
 
