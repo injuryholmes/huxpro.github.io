@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "cs231n Lecture 4<br>Backpropagation<br>反向传播笔记"
+title: "cs231n Lecture 4<br>Backpropagation Notes<br>反向传播笔记"
 date: 2018-02-09
 author: "injuryholmes"
 catalog: false
