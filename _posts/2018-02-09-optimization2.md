@@ -48,15 +48,21 @@ cs231N是斯坦福大学的卷积神经网络课程，我通过博客记录自�
 ### Simple expressions and interpretation of the gradient
 
 让我们从简单的例子开始。考虑两个数的乘法函数 $f(x,y) = xy$ 。推导任一输入的偏导数是一个简单的微积分问题：
+
+
 $$
-\\\\
 f(x,y) = x y \hspace{0.5in} \rightarrow \hspace{0.5in} \frac{\partial f}{\partial x} = y \hspace{0.5in} \frac{\partial f}{\partial y} = x
 $$
+
+
 ​	**Interpretation** 请记住导数定义公式的意义：它们表示函数相对于围绕特定点附近无限小区域的变量的变化率：
+
+
 $$
-\\\\
 \frac{df(x)}{dx} = \lim_{h\ \to 0} \frac{f(x + h) - f(x)}{h}
 $$
+
+
 
 
 ​	注意等式左侧的除法与右侧的除法不同。左边的这个符号表示对函数 $f$ 执行运算符 $\frac{d}{dx}$ ，求得导数，右边就是单纯的除法。当 $h$ 很小时，函数近似一条直线，导数是它每个点的斜率。换句话说，每个变量的导数告诉你整个表达式对其值的敏感度。例如，$x = 4, y = -3$ ，那么 $f(x,y)= - 12$ ，并且 $\frac{\partial f}{\partial x} = -3$ 。这表示如果我们要把这个点的 $x$ 值增加一点，那么对整个表达式的影响就是减少它的三倍。这可以通过重新排列上面的等式 $f(x + h) = f(x) + h \frac{df(x)}{dx}$ 来看出。同理，$\frac{\partial f}{\partial y} = 4$ ，如果将 $y$ 值增加一点 $h$ 也会增加函数的输出，并增加 $4h$ 。
@@ -70,13 +76,17 @@ $$
 如前所述，梯度 $\nabla f $ 是所有偏导数组成的向量，所以我们有 $\nabla f = [\frac {\partial f} {\partial x}，\frac {\partial f} {\partial y}] = [y，x]$ 。尽管梯度本质上是一个向量，但为简单起见，我们通常会说 **the gradient on x** 而不是 **the partial derivative on x** 。
 
 我们也可以求`add`的导数：
+
+
 $$
-\\\\
 f(x,y) = x + y \hspace{0.5in} \rightarrow \hspace{0.5in} \frac{\partial f}{\partial x} = 1 \hspace{0.5in} \frac{\partial f}{\partial y} = 1
 $$
+
+
 以及`max`的导数：
+
+
 $$
-\\\\
 f(x,y) = \max(x, y) \hspace{0.5in} \rightarrow \hspace{0.5in} \frac{\partial f}{\partial x} = \mathbb{1}(x >= y) \hspace{0.5in} \frac{\partial f}{\partial y} = \mathbb{1}(y >= x)
 $$
 
@@ -134,12 +144,16 @@ dfdy = 1.0 * dfdq # dq/dy = 1
 
 我们上面介绍的门是相对任意的。 任何一种可导函数都可以作为一个门，我们可以把多个门组成一个门，或者为了计算方便，可以把一个函数分解成多个门。 让我们看一个例子：
 
+
 $$
-\\\\
 f(w,x) = \frac{1}{1+e^{-(w_0x_0 + w_1x_1 + w_2)}}
 $$
 
+
+
 这个表达式描述了使用S形激活函数的二维神经元（输入x和权重w）。但是现在让我们把它想象成一个函数，从输入w，x到单个数字。 该函数由多个门组成。 除了上面已经介绍的`add，mul，max`之外，还有四个：
+
+
 $$
 \\\\
 f(x) = \frac{1}{x} 
@@ -158,18 +172,24 @@ f_a(x) = ax
 \hspace{1in} \rightarrow \hspace{1in} 
 \frac{df}{dx} = a
 $$
+
+
 函数 $fc，fa$ 分别是 $x+c$ ，和用 $a$ 进行常数缩放。这些是特殊情况下的加法和乘法，但是我们将它们作为（新）一元门引入，因为我们确实需要常量的梯度 $c, a$ 。 完整的电路如下所示：
 
-<img src="=/img/in-post/2018-02-09-optimization2/sigmoidCircuit.png" width="90%">
+<img src="/img/in-post/2018-02-09-optimization2/sigmoidCircuit.png" width="90%">
 
 二维神经元的示例电路。 输入是$[x0，x1]$ ，神经元的学习权重是 $[w0，w1，w2]$ 。 正如我们后面将会看到的那样，神经元计算输入和权重的点积，然后将该神经元的激活阈值范围通过`sogmoid`函数压缩到0到1之内。
 
 在上面的例子中，图示中右边横线部分的所有操作可以抽象出一个常用的函数，这个函数被称为`sigmoid`函数 $σ(x)$ 。如果我们对`sigmoid`函数求导，我们会发现很有意思的事：
+
+
 $$
 \sigma(x) = \frac{1}{1+e^{-x}} \\\\
 \rightarrow \hspace{0.3in} \frac{d\sigma(x)}{dx} = \frac{e^{-x}}{(1+e^{-x})^2} = \left( \frac{1 + e^{-x} - 1}{1 + e^{-x}} \right) \left( \frac{1}{1+e^{-x}} \right) 
 = \left( 1 - \sigma(x) \right) \sigma(x)
 $$
+
+
 导数非常简单！例如，`sigmoid`表达式接收输入1.0，并在正向传递期间计算输出0.73。 根据上面的推导，局部梯度为 $(1 - 0.73)* 0.73 \simeq 0.2$，和上图一步一步算出来的一样（见上图），这样一步到位计算出导数简单快速。 因此，在实际应用中，会有这些将多个门组合成单个门的操作。用python代码实现如下：
 
 ```python
@@ -196,9 +216,13 @@ dw = [x[0] * ddot, x[1] * ddot, 1.0 * ddot] # backprop into w
 ### Backprop in practice: Staged computation
 
 举一例子看：
+
+
 $$
 f(x,y) = \frac{x + \sigma(y)}{\sigma(x) + (x+y)^2}
 $$
+
+
 这个函数没有什么特别的用处，只是一个很好的例子说明`back prop`如何工作。 强调这一点非常重要，如果你要开始对x或y进行求导，结果非常复杂。然而这样做完全没有必要，因为我们不需要写一个明确的函数来计算梯度。我们只需要知道如何计算它。 以下是我们如何构建这种表达的正向传递：
 
 ```python
