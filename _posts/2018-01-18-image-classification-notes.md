@@ -360,4 +360,4 @@ for k in [1, 3, 5, 10, 20, 50, 100]:
 
 版权声明：
 
-- 自由转载-非商用-非衍生-保持署名（[创意共享3.0许可证](http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh)）
+- 自由转载-非商用-非衍生-保持署名（[创意共享4.0许可证](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh)）
