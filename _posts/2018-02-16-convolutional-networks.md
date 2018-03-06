@@ -76,7 +76,7 @@ cs231N是斯坦福大学的卷积神经网络课程，我通过博客记录自�
 
 也就是说，球A在扫描`input volume`的时候，只要扫描到横线，就被激活了。那么为了记录这个横线在原`input volume`中的位置，我们把激活的地点记录下来作为`filter A`的`activation map`，也就是一个`depth slice`（即蓝色长方体中的一个切面），这样`depth`个数的`filter`就对应`depth`个数的`activation map`，我们把他们堆叠在一起，就是我们的图中蓝色的长方体。
 
-**仔细想想是这么一回事吗？**其实上面我说的都是错的，如果你也是这样想的话，就和我一开始犯了同样的错误。
+**仔细想想是这么一回事吗?**其实上面我说的都是错的，如果你也是这样想的话，就和我一开始犯了同样的错误。
 
 <a name="correctdef"></a>
 
@@ -86,7 +86,7 @@ cs231N是斯坦福大学的卷积神经网络课程，我通过博客记录自�
 
 所以，这个图实际上可以被拆分为如下图：
 
-<img src="/Users/yingzeliang/injuryholmes.github.io/img/in-post/2018-02-16-cnn/convlayer.jpeg">
+<img src="/img/in-post/2018-02-16-cnn/convlayer.jpeg">
 
 可以看到，每一个`filter` 都对应一个`depth slice`，图中用阴影部分代表的是`filter A`对应的`depth slice`，这样，这样`depth slice`是该`filter`和`input volume`的`activation map`也就不难理解了。
 
@@ -118,7 +118,7 @@ cs231N是斯坦福大学的卷积神经网络课程，我通过博客记录自�
 
 **我们平时说的`CONV layer`中存储的到底是`filters`还是`activation maps`？**
 
-​	我们平时所说的`CONV layer`当然是`filters`啦！因为我们最后需要训练得出的模型，本质上是一个函数，这个函数能够用在不同的场景中处理图片识别的任务，所以我们需要记录的是`filters`的参数而不是`activation maps`，但是在训练的过程中，我们仍然要记录`activation maps`的值，以便之后进行`back prop`对`gradient`进行计算。
+我们平时所说的`CONV layer`当然是`filters`啦！因为我们最后需要训练得出的模型，本质上是一个函数，这个函数能够用在不同的场景中处理图片识别的任务，所以我们需要记录的是`filters`的参数而不是`activation maps`，但是在训练的过程中，我们仍然要记录`activation maps`的值，以便之后进行`back prop`对`gradient`进行计算。
 
 <a name="fc2conv"></a>
 
@@ -132,13 +132,15 @@ cs231N是斯坦福大学的卷积神经网络课程，我通过博客记录自�
 
 ​	在CNN中，有一个概念叫做`translational invariance`。我用一个例子来解释：
 
-​	正如我们上面看到CNN的经典结构，比如，我们有10个`CONV layers`，中间夹着必要的`POOL layers`，神经网络的最后一层使用`FC layer`点对点连接通过之前10个`CONV layers`提取出来的特征信息。`LeNet`就是这样的模型。但是，这样的模型有一个问题，就是它只能针对特定大小的图片输入，假设我们的输入图片的尺寸是 $28*28$，经过一连串卷积和下采样之后，得到尺寸为$12*12$的特征信息，如果我们用`FC layer`去连接这一层，我们就必须要构建含有$12*12=144$个神经元的`FC layer`，这在图像检测（`object detection`）的实际使用中，是非常不方便的，因为我们的输入图像往往不是一样大的。但是把`FC layer`转化成`CONV layer`就方便多了。原文中举了这么个例子：（摘自原文）
+​	正如我们上面看到CNN的经典结构，比如，我们有10个`CONV layers`，中间夹着必要的`POOL layers`，神经网络的最后一层使用`FC layer`点对点连接通过之前10个`CONV layers`提取出来的特征信息。`LeNet`就是这样的模型。但是，这样的模型有一个问题，就是它只能针对特定大小的图片输入，假设我们的输入图片的尺寸是 $28*28$，经过一连串卷积和下采样之后，得到尺寸为 $12*12$ 的特征信息，如果我们用`FC layer`去连接这一层，我们就必须要构建含有 $12*12=144$ 个神经元的`FC layer`，这在图像检测（`object detection`）的实际使用中，是非常不方便的，因为我们的输入图像往往不是一样大的。但是把`FC layer`转化成`CONV layer`就方便多了。原文中举了这么个例子：（摘自原文）
 
-For example, if 224x224 image gives a volume of size [7x7x512] - i.e. a reduction by 32, then forwarding an image of size 384x384 through the converted architecture would give the equivalent volume in size [12x12x512], since 384/32 = 12. Following through with the next 3 CONV layers that we just converted from FC layers would now give the final volume of size [6x6x1000], since (12 - 7)/1 + 1 = 6. Note that instead of a single vector of class scores of size [1x1x1000], we’re now getting an entire 6x6 array of class scores across the 384x384 image.
+<div>
 
-> Evaluating the original ConvNet (with FC layers) independently across 224x224 crops of the 384x384 image in strides of 32 pixels gives an identical result to forwarding the converted ConvNet one time.
+<p>For example, if $224*224$ image gives a volume of size $7*7*512$ - i.e. a reduction by 32, then forwarding an image of size $384*384$ through the converted architecture would give the equivalent volume in size $[12*12*512]$, since $384/32 = 12$. Following through with the next 3 CONV layers that we just converted from FC layers would now give the final volume of size $[6*6*1000]$, since $(12 - 7)/1 + 1 = 6$. Note that instead of a single vector of class scores of size $[1*1*1000]$, we’re now getting an entire $6*6$ array of class scores across the $384*384$ image.
+valuating the original ConvNet (with FC layers) independently across $224*224$ crops of the $384*384$ image in strides of 32 pixels gives an identical result to forwarding the converted ConvNet one time.
+aturally, forwarding the converted ConvNet a single time is much more efficient than iterating the original ConvNet over all those 36 locations, since the 36 evaluations share computation. This trick is often used in practice to get better performance, where for example, it is common to resize an image to make it bigger, use a converted ConvNet to evaluate the class scores at many spatial positions and then average the class scores.
 
-Naturally, forwarding the converted ConvNet a single time is much more efficient than iterating the original ConvNet over all those 36 locations, since the 36 evaluations share computation. This trick is often used in practice to get better performance, where for example, it is common to resize an image to make it bigger, use a converted ConvNet to evaluate the class scores at many spatial positions and then average the class scores.
+</p>
 
 ​	也就是说原本输入是$224*224$，经过卷积和下采样后得到大小为 $7*7*512$ 的输出，如果接着使用`FC layer`，我们就需要有 $7*7*512=25088$ 个神经元，而且当我们的输入图片变成 $384*384$ 之后，之前训练得到的`FC layer` 的数据都没有用了，因为我们需要更大的，含有 $12*12*512 = 73728$个神经元的`FC layer`，显然，这不OK。
 
@@ -148,7 +150,7 @@ Naturally, forwarding the converted ConvNet a single time is much more efficient
 
 ## 堆叠CONV layer的好处
 
-原文中的意思就是，使用 $3*3$ 的`CONV layer`，在`layer3`中的一个神经元，向上延伸至`input volume`，可以连接到7个神经元，也就是说，在第三层中，每个神经元能够提取的信息是基于原始输入中 $[7*7]$ 的局部区域。
+<p>原文中的意思就是，使用 $3*3$ 的`CONV layer`，在`layer3`中的一个神经元，向上延伸至`input volume`，可以连接到7个神经元，也就是说，在第三层中，每个神经元能够提取的信息是基于原始输入中 $[7*7]$ 的局部区域。</p>
 
 <img src="/img/in-post/2018-02-16-cnn/muilticonv.jpeg"> 
 
