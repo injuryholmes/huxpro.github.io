@@ -69,7 +69,7 @@ $$
 
 > The derivative on each variable tells you the sensitivity of the whole expression on its value.
 >
-> 函数倒数表示的是函数对于某点变化的敏感程度。
+> 函数导数表示的是函数对于某点变化的敏感程度。
 >
 > 敏感程度反应在该点变化对函数值变化的剧烈程度。
 
