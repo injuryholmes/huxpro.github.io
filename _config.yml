@@ -5,7 +5,7 @@ header-img: img/home-bg.jpg
 email: injuryholmes@gmail.com
 description: "关于机器学习，计算机视觉 | 应泽良，Machine learning & Computer vision Lover | 这里是 @injuryholmes应泽良 的个人博客，与你一起发现更大的世界。"
 keyword: "应泽良, Injury应泽良, injury, @injuryholmes,  应泽良的博客, Injuryholmes Blog, 博客, 个人网站, 互联网, Machine learning, 机器学习，深度学习"
-url: "https://injuryholmes.github.io"              # your host, for absolute URL
+url: "https://injuryholmes.me"              # your host, for absolute URL
 baseurl: ""                             # for example, '/blog' if your blog hosted on 'host/blog'
 
 
@@ -61,7 +61,7 @@ netease_comment: false
 
 # Google Analytics
 ga_track_id: 'UA-112815641-1'            # Format: UA-xxxxxx-xx
-ga_domain: injuryholmes.github.io
+ga_domain: injuryholmes.me
 
 
 
